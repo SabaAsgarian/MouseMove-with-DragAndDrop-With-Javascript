@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link rel="stylesheet" href="css/javascript.css">
+    <link rel="stylesheet" href="css/output.css">
+</head>
+<body class="bg-[#E1DFDE] w-full h-auto flex justify-center items-center mx-auto">
+   <h1>design By <a class="hover:text-red-400" href="https://www.linkedin.com/in/saba-asgarian-69161088?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">Saba Asgarian</a> with Tailwind & javascript</h1>
+    <img class="w-[500px] h-[600px]" src="img/dragone.png" alt="">
+   <div class="box">
+        <img src="img/crow.png" id="crow" alt="">
+   </div>
+</body>
+
+<script>
+    const img = document.querySelector('img')
+    let myWidth =(img.computedStyleMap().get('width').value)/10
+    let myHeight =(img.computedStyleMap().get('Height').value)/10
+    console.log(myWidth);
+    console.log(myHeight);
+    img.addEventListener('mousemove',(event)=>{
+        let x =((event.offsetX)/10) - (myWidth/2)
+        let y =((event.offsetY)/10) - (myHeight/2)
+        console.log(x + ' - ' + y);
+        img.style.transform='perspective(800px)rotateX('+y+'deg)rotateY('+x+'deg)'
+    })
+    const box = document.querySelector('.box')
+    box.addEventListener('mousedown',()=>{
+        box.style.transform='translate(-50%,-50%)'
+       box.style.position='absolute'
+       window.addEventListener('mousemove',movee)
+    })
+    box.addEventListener('mouseup',()=>{
+        window.removeEventListener('mousemove',movee)
+    })
+    function movee(event){
+        console.log(event.clientX);
+        let x = event.clientX
+        let y = event.clientY
+        box.style.left = x + 'px'
+        box.style.top = y + 'px'
+    }
+</script>
+</html>
+<!-- npx tailwindcss -i ./src/css/master.css -o ./src/css/output.css --watch -->
